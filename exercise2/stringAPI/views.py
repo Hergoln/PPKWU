@@ -7,6 +7,6 @@ def stringAPI(request, string):
         'lowerCase': sum(1 for c in string if c.islower()),
         'upperCase': sum(1 for c in string if c.isupper()),
         'digits': sum(1 for c in string if c.isdigit()),
-        'specialChar': sum(1 for c in string if not c.isalpha())
+        'specialChar': sum(1 for c in string if not c.isalpha() and not c.isdigit())
     }
     return JsonResponse(data)
