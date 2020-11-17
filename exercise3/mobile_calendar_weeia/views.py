@@ -11,6 +11,6 @@ def calendar(request, dateString, timeString, eventTitle):
     e.name = eventTitle
     e.begin = dateString + ' ' + timeString
     c.events.add(e)
-    with open('example.ics', 'w') as exemplary_file:
+    with open('../githubPagesRoot/example.ics', 'w') as exemplary_file:
         exemplary_file.writelines(c)
     return HttpResponse(c)
