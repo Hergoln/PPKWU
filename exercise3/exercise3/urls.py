@@ -14,6 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path, include
+
 urlpatterns = [
-    path('calendar/<string>', include('mobile_calendar_weeia.urls')),
+    path('calendar/<dateString>/<timeString>/<eventTitle>', include('mobile_calendar_weeia.urls')),
 ]
