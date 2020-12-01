@@ -172,3 +172,6 @@ END:VCALENDAR
 
 ```
 
+[March 2020 ics](https://hergoln.github.io/PPKWU//githubPagesRoot/example_march.ics)
+
+[October 2020 ics](https://hergoln.github.io/PPKWU//githubPagesRoot/githubPagesRoot/example_october.ics)
