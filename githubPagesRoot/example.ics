@@ -1,9 +1,0 @@
-BEGIN:VCALENDAR
-VERSION:2.0
-PRODID:ics.py - http://git.io/lLljaA
-BEGIN:VEVENT
-DTSTART:19970924T213700Z
-SUMMARY:tutu³ innego wydarzenia
-UID:a4014f93-1500-44ec-a5ef-c9cad7b0ac97@a401.org
-END:VEVENT
-END:VCALENDAR
