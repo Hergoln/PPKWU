@@ -12,6 +12,11 @@ def calendar(request, month):
 	stuff = make_stuff(month)
 	return HttpResponse(stuff)
 
+def calendar_no_month(request):
+	month = datetime.datetime.now().month
+	stuff = make_stuff(month)
+	return HttpResponse(stuff)
+
 def make_stuff(month):
 	year = datetime.datetime.now().year
 	URL= "http://www.weeia.p.lodz.pl/pliki_strony_kontroler/kalendarz.php"
