@@ -2,5 +2,5 @@ from . import views
 from django.urls import path
 
 urlpatterns = [
-    path('', views.calendar, name='calendar')
+	path('<month>', views.calendar, name='calendar'),
 ]

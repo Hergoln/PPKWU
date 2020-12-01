@@ -16,5 +16,5 @@ Including another URLconf
 from django.urls import path, include
 
 urlpatterns = [
-    path('calendar/<dateString>/<timeString>/<eventTitle>', include('mobile_calendar_weeia.urls')),
+	path('calendar/', include('mobile_calendar_weeia.urls')),
 ]
