@@ -10,12 +10,15 @@ import unicodedata
 
 def calendar(request, month):
 	stuff = make_stuff(month)
+
 	return HttpResponse(stuff)
 
 def calendar_no_month(request):
 	month = datetime.datetime.now().month
 	stuff = make_stuff(month)
-	return HttpResponse(stuff)
+	r = HttpResponse()
+	r.writelines(stuff)
+	return  r
 
 def make_stuff(month):
 	year = datetime.datetime.now().year
@@ -39,7 +42,7 @@ def make_stuff(month):
 		
 		stuff.events.add(e)
 
-	with open('../githubPagesRoot/example_march.ics', 'w') as exemplary_file:
+	with open('../githubPagesRoot/example.ics', 'w') as exemplary_file:
 	 	exemplary_file.writelines(stuff)
 	return stuff
 
