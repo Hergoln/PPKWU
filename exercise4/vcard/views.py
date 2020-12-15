@@ -16,13 +16,36 @@ def make_stuff(searchQuery):
 
     endStrings = ['' for i in range(numberOfCompaniesOnFirstPage)]
 
-    for num, element in enumerate(soup.find_all('a', class_="company-name")):
-        endStrings[num] += element.text + '::'
+    for num, el in enumerate(soup.find_all('li', class_='company-item')):
+        for _, element in enumerate(el.find_all('a', class_="company-name")):
+            if element is not None:
+                endStrings[num] += element.text.strip()
+            endStrings[num] += '::'
 
-    for num, element in enumerate(soup.find_all('div', class_="address")):
-        endStrings[num] += element.text + '::'
+        for _, element in enumerate(el.find_all('div', class_="address")):
+            if element is not None:
+                endStrings[num] += element.text.strip()
+            endStrings[num] += '::'
 
-    for num, element in enumerate(soup.find_all('a', class_="icon-telephone")):
-        print(element.text)
+        for _, element in enumerate(el.find_all('a', class_="icon-telephone")):
+            if element is not None:
+                endStrings[num] += element.get('title').strip()
+            endStrings[num] += '::'
 
+        for _, element in enumerate(el.find_all('a', class_="icon-website")):
+            href = element.get('href')
+            if href is not None:
+                endStrings[num] += href.strip()
+            endStrings[num] += '::'
+
+            
+        for _, element in enumerate(el.find_all('a', class_="icon-envelope")):
+            title = element.get('title')
+            if title is not None:
+                endStrings[num] += title.strip()
+            endStrings[num] += '::'
+
+
+
+    [print(i) for i in endStrings]
     return r 
