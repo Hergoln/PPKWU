@@ -18,4 +18,10 @@ Every button generated in response is connected to another enpoint *vcardGen*
 ```
 localhost:8000/vcardGen/<string>
 ```
-*vcardGen* endpoint is POST endpoint that expects data of result from https://panoramafirm.pl/ page with contact data
+*vcardGen* endpoint is POST endpoint that expects data of result from https://panoramafirm.pl/ page all important data.
+Data:
+- name of person/business
+- localization
+- phone number
+- website
+- email adress
