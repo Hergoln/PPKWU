@@ -12,16 +12,15 @@ def make_stuff(searchQuery):
     print(URL)
     r = requests.get(url=URL)
     soup = BeautifulSoup(r.text, 'html.parser')
+    numberOfCompaniesOnFirstPage = len(soup.find_all('a', class_="company-name"))
 
-    print('start printing')
-    for num, element in enumerate(soup.find(id="company-list")):
-    	print(element)
+    for num, element in enumerate(soup.find_all('a', class_="company-name")):
+        print(element.text)
 
-    # 	e.name = unicodedata.normalize('NFD', soup.find_all("div", class_="InnerBox")[num].string).encode('ascii', 'ignore').decode("utf-8")
-    # 	print(str(year) + '-' + month + '-' + add_0_prefix_if_ness(action.string) + ' ' + '12:00')
-    # 	e.begin = str(year) + '-' + month + '-' + add_0_prefix_if_ness(action.string) + ' ' + '12:00'
+        # listElementSoup = BeautifulSoup(str(element.string), 'html.parser')
+        # for el in enumerate(listElementSoup.find_all('a', class_="company-name")):
+        #     print(el)
 
-    # 	stuff.events.add(e)
 
     # with open('../githubPagesRoot/example.ics', 'w') as exemplary_file:
     #  	exemplary_file.writelines(stuff)
