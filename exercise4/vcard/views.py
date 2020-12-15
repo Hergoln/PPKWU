@@ -14,14 +14,15 @@ def make_stuff(searchQuery):
     soup = BeautifulSoup(r.text, 'html.parser')
     numberOfCompaniesOnFirstPage = len(soup.find_all('a', class_="company-name"))
 
+    endStrings = ['' for i in range(numberOfCompaniesOnFirstPage)]
+
     for num, element in enumerate(soup.find_all('a', class_="company-name")):
+        endStrings[num] += element.text + '::'
+
+    for num, element in enumerate(soup.find_all('div', class_="address")):
+        endStrings[num] += element.text + '::'
+
+    for num, element in enumerate(soup.find_all('a', class_="icon-telephone")):
         print(element.text)
 
-        # listElementSoup = BeautifulSoup(str(element.string), 'html.parser')
-        # for el in enumerate(listElementSoup.find_all('a', class_="company-name")):
-        #     print(el)
-
-
-    # with open('../githubPagesRoot/example.ics', 'w') as exemplary_file:
-    #  	exemplary_file.writelines(stuff)
     return r 
