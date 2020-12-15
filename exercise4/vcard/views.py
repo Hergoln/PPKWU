@@ -1,4 +1,5 @@
 from django.shortcuts import render
+import requests
 
 # Create your views here.
 from django.http import HttpResponse
@@ -8,7 +9,7 @@ def vcard(request, string):
 def make_stuff(searchQuery):
     URL= "https://panoramafirm.pl/szukaj?k=" + '+'.join(searchQuery.split()) + "&l="
     print(URL)
-    # r = requests.get(url=URL)
+    r = requests.get(url=URL)
     # soup = BeautifulSoup(r.text, 'html.parser')
 
 
@@ -23,4 +24,4 @@ def make_stuff(searchQuery):
 
     # with open('../githubPagesRoot/example.ics', 'w') as exemplary_file:
     #  	exemplary_file.writelines(stuff)
-    return URL 
+    return r 
