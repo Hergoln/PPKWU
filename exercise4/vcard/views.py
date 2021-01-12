@@ -8,11 +8,10 @@ def vcard(request, string):
     return HttpResponse(make_stuff(string))
 
 def result(request, string):
-    return createVCard(string)
+    return HttpResponse(createVCard(string))
 
 def make_stuff(searchQuery):
     URL= "https://panoramafirm.pl/szukaj?k=" + '+'.join(searchQuery.split()) + "&l="
-    print(URL)
     r = requests.get(url=URL)
     soup = BeautifulSoup(r.text, 'html.parser')
     numberOfCompaniesOnFirstPage = len(soup.find_all('a', class_="company-name"))
@@ -21,46 +20,50 @@ def make_stuff(searchQuery):
 # jeszcze przerobić na odpowiedni format
     endStrings = ['' for i in range(numberOfCompaniesOnFirstPage)]
     titles = ['' for i in range(numberOfCompaniesOnFirstPage)]
-
+    hrefs = ['' for i in range(numberOfCompaniesOnFirstPage)]
     for num, el in enumerate(soup.find_all('li', class_='company-item')):
-        for _, element in enumerate(el.find_all('a', class_="company-name")):
+        for item, element in enumerate(el.find_all('a', class_="company-name")):
             if element is not None:
                 endStrings[num] += element.text.strip()
+                hrefs[num] += element['href']
                 titles[num] += element.text.strip()
-            endStrings[num] += '__'
+            endStrings[num] += ']['
 
         for _, element in enumerate(el.find_all('div', class_="address")):
             if element is not None:
                 endStrings[num] += element.text.strip()
-            endStrings[num] += '__'
+            endStrings[num] += ']['
 
         for _, element in enumerate(el.find_all('a', class_="icon-telephone")):
             if element is not None:
                 endStrings[num] += element.get('title').strip()
-            endStrings[num] += '__'
+            endStrings[num] += ']['
 
         for _, element in enumerate(el.find_all('a', class_="icon-website")):
             href = element.get('href')
             if href is not None:
                 endStrings[num] += href.strip()
-            endStrings[num] += '__'
+            endStrings[num] += ']['
 
             
         for _, element in enumerate(el.find_all('a', class_="icon-envelope")):
             title = element.get('title')
             if title is not None:
                 endStrings[num] += title.strip()
-            endStrings[num] += '__'
-
-
+            endStrings[num] += ']['
 
     htmlString = ''
     for index in range(len(endStrings)):
-        htmlString += '<a href="http://localhost:8000/result/' + endStrings[index] + '">' + titles[index] + '</a></br>'
+        endStrings[index] = endStrings[index].replace('https://', '')
+        endStrings[index] = endStrings[index].replace('http://', '')
+        htmlString += titles[index] + ' : <a href="http://localhost:8000/result/' + endStrings[index] + '">GENERUJ VCARD</a></br>'
     return htmlString
 
 
-def createVCard(req):
+def createVCard(data):
+    for i in data.split(']['):
+        print(i + '\n')
+        print()
     vcardInString = ''
 
     vcardInString += 'BEGIN:VCARD'
@@ -70,4 +73,4 @@ def createVCard(req):
 
 
     vcardInString += 'END:VCARD'
-    return vcardInString
+    return endStrings[0]

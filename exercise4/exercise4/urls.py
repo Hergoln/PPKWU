@@ -16,6 +16,6 @@ Including another URLconf
 from django.urls import path, include
 
 urlpatterns = [
-    path('vcard/<string>', include('vcard.urls')),
-    path('result/<string>', include('vcard.urls')),
+    path('vcard/', include('vcard.urls')),
+    path('result/', include('vcard.resulturl'))
 ]
