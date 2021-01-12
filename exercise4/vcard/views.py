@@ -53,7 +53,6 @@ def make_stuff(searchQuery):
     return endStrings
 
 
-
 def createVCard():
     vcardInString = ''
 
@@ -61,7 +60,7 @@ def createVCard():
     vcardInString += 'VERSION:4.0'
     # here is code for generation
 
-
+    
 
     vcardInString += 'END:VCARD'
     return vcardInString
