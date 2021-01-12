@@ -14,6 +14,8 @@ def make_stuff(searchQuery):
     soup = BeautifulSoup(r.text, 'html.parser')
     numberOfCompaniesOnFirstPage = len(soup.find_all('a', class_="company-name"))
 
+# w endStrings leżą sobie pod koniec tej funkcji prawie całe vCardy, trzeba by je 
+# jeszcze przerobić na odpowiedni format
     endStrings = ['' for i in range(numberOfCompaniesOnFirstPage)]
 
     for num, el in enumerate(soup.find_all('li', class_='company-item')):
@@ -48,4 +50,18 @@ def make_stuff(searchQuery):
 
 
     [print(i) for i in endStrings]
-    return r 
+    return endStrings
+
+
+
+def createVCard():
+    vcardInString = ''
+
+    vcardInString += 'BEGIN:VCARD'
+    vcardInString += 'VERSION:4.0'
+    # here is code for generation
+
+
+
+    vcardInString += 'END:VCARD'
+    return vcardInString
