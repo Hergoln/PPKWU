@@ -16,8 +16,8 @@ def make_stuff(searchQuery):
     soup = BeautifulSoup(r.text, 'html.parser')
     numberOfCompaniesOnFirstPage = len(soup.find_all('a', class_="company-name"))
 
-# w endStrings leżą sobie pod koniec tej funkcji prawie całe vCardy, trzeba by je 
-# jeszcze przerobić na odpowiedni format
+    # w endStrings leżą sobie pod koniec tej funkcji prawie całe vCardy, trzeba by je 
+    # jeszcze przerobić na odpowiedni format
     endStrings = ['' for i in range(numberOfCompaniesOnFirstPage)]
     titles = ['' for i in range(numberOfCompaniesOnFirstPage)]
     hrefs = ['' for i in range(numberOfCompaniesOnFirstPage)]
@@ -56,14 +56,15 @@ def make_stuff(searchQuery):
     for index in range(len(endStrings)):
         endStrings[index] = endStrings[index].replace('https://', '')
         endStrings[index] = endStrings[index].replace('http://', '')
-        htmlString += titles[index] + ' : <a href="http://localhost:8000/result/' + endStrings[index] + '">GENERUJ VCARD</a></br>'
+        htmlString += titles[index] + ' : <a href="http://localhost:8000/vcard/result/' + endStrings[index] + '">GENERUJ VCARD</a></br>'
     return htmlString
 
 
 def createVCard(data):
+    hymySring = ''
+    hymySring += data
     for i in data.split(']['):
-        print(i + '\n')
-        print()
+        hymySring += i + "</b>"
     vcardInString = ''
 
     vcardInString += 'BEGIN:VCARD'
@@ -73,4 +74,4 @@ def createVCard(data):
 
 
     vcardInString += 'END:VCARD'
-    return endStrings[0]
+    return hymySring
